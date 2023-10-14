@@ -31,7 +31,6 @@ class UGATIT(object) :
         self.result_dir = args.result_dir
         self.data_dir = args.data_dir
         self.checkpoint_dir = args.checkpoint_dir
-        self.mini = args.mini
 
         self.iteration = args.iteration
         self.decay_flag = args.decay_flag
