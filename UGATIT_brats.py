@@ -129,7 +129,7 @@ class UGATIT(object) :
                                                         pin_memory=True, drop_last=True)
         self.dataloader_t = torch.utils.data.DataLoader(dataset_t, batch_size=self.batch_size, shuffle=True,
                                                         pin_memory=True, drop_last=True)
-        if opts.do_validation:
+        if self.do_validation:
             self.val_data_t, self.val_data_s = common_brats.load_test_data(self.data_dir, "val")
 
         """
