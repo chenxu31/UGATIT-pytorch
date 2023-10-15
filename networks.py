@@ -4,7 +4,7 @@ from torch.nn.parameter import Parameter
 
 
 class ResnetGenerator(nn.Module):
-    def __init__(self, input_nc, output_nc, ngf=64, n_blocks=6, img_size=256, light=False):
+    def __init__(self, input_nc, output_nc, ngf=64, n_blocks=6, img_size=256, light=False, clip=True):
         assert(n_blocks >= 0)
         super(ResnetGenerator, self).__init__()
         self.input_nc = input_nc
@@ -13,6 +13,7 @@ class ResnetGenerator(nn.Module):
         self.n_blocks = n_blocks
         self.img_size = img_size
         self.light = light
+        self.clip = clip
 
         DownBlock = []
         DownBlock += [nn.ReflectionPad2d(3),
@@ -68,9 +69,13 @@ class ResnetGenerator(nn.Module):
                          ILN(int(ngf * mult / 2)),
                          nn.ReLU(True)]
 
+        """
         UpBlock2 += [nn.ReflectionPad2d(3),
                      nn.Conv2d(ngf, output_nc, kernel_size=7, stride=1, padding=0, bias=False),
                      nn.Tanh()]
+        """
+        UpBlock2 += [nn.ReflectionPad2d(3),
+                     nn.Conv2d(ngf, output_nc, kernel_size=7, stride=1, padding=0, bias=False)]
 
         self.DownBlock = nn.Sequential(*DownBlock)
         self.FC = nn.Sequential(*FC)
@@ -106,6 +111,9 @@ class ResnetGenerator(nn.Module):
         for i in range(self.n_blocks):
             x = getattr(self, 'UpBlock1_' + str(i+1))(x, gamma, beta)
         out = self.UpBlock2(x)
+
+        if self.clip:
+            out = torch.clamp(out, 1., -1.)
 
         return out, cam_logit, heatmap
 
