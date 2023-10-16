@@ -113,7 +113,7 @@ class ResnetGenerator(nn.Module):
         out = self.UpBlock2(x)
 
         if self.clip:
-            out = torch.clamp(out, 1., -1.)
+            out = torch.clamp(out, -1., 1.)
 
         return out, cam_logit, heatmap
 

@@ -397,20 +397,20 @@ class UGATIT(object) :
 
         self.genA2B.eval(), self.genB2A.eval()
         test_ids_t = common_pelvic.load_data_ids(self.data_dir, "testing", "treat")
-        test_data_s, test_data_t, _, _ = common_pelvic.load_test_data(self.data_dir, mini=self.mini)
+        test_data_s, test_data_t, _, _ = common_pelvic.load_test_data(self.data_dir, valid=True)
 
-        test_st_psnr = numpy.zeros((test_data_s.shape[0], 1), numpy.float32)
-        test_ts_psnr = numpy.zeros((test_data_t.shape[0], 1), numpy.float32)
+        test_st_psnr = numpy.zeros((len(test_data_s),), numpy.float32)
+        test_ts_psnr = numpy.zeros((len(test_data_t),), numpy.float32)
         test_st_list = []
         test_ts_list = []
         with torch.no_grad():
-            for i in range(test_data_s.shape[0]):
-                test_st = numpy.zeros(test_data_s.shape[1:], numpy.float32)
-                test_ts = numpy.zeros(test_data_t.shape[1:], numpy.float32)
-                used = numpy.zeros(test_data_s.shape[1:], numpy.float32)
-                for j in range(test_data_s.shape[1] - self.img_ch + 1):
-                    test_patch_s = torch.tensor(test_data_s[i:i + 1, j:j + self.img_ch, :, :], device=self.device)
-                    test_patch_t = torch.tensor(test_data_t[i:i + 1, j:j + self.img_ch, :, :], device=self.device)
+            for i in range(len(test_data_s)):
+                test_st = numpy.zeros(test_data_s[i].shape, numpy.float32)
+                test_ts = numpy.zeros(test_data_t[i].shape, numpy.float32)
+                used = numpy.zeros(test_data_s[i].shape, numpy.float32)
+                for j in range(test_data_s[i].shape[0] - self.img_ch + 1):
+                    test_patch_s = torch.tensor(test_data_s[i][j:j + self.img_ch, :, :], device=self.device).unsqueeze(0)
+                    test_patch_t = torch.tensor(test_data_t[i][j:j + self.img_ch, :, :], device=self.device).unsqueeze(0)
 
                     ret_st = self.genA2B(test_patch_s)
                     ret_ts = self.genB2A(test_patch_t)
