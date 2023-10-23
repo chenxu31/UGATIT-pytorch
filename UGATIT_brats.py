@@ -11,6 +11,7 @@ import os
 import skimage.io
 import sys
 import platform
+from skimage.metrics import structural_similarity as SSIM
 
 if platform.system() == 'Windows':
   sys.path.append(r"E:\我的坚果云\sourcecode\python\util")
@@ -373,7 +374,7 @@ class UGATIT(object) :
         return val_st_psnr, val_ts_psnr, val_st_list, val_ts_list
 
     def test(self):
-        self.load("final")
+        self.load("best")
         """
         model_list = glob(os.path.join(self.checkpoint_dir, '*_final.pt'))
         if not len(model_list) == 0:
@@ -390,7 +391,7 @@ class UGATIT(object) :
             os.makedirs(self.result_dir)
 
         self.genA2B.eval(), self.genB2A.eval()
-        test_data_t, test_data_s = common_brats.load_test_data(opts.data_dir, "test")
+        test_data_t, test_data_s = common_brats.load_test_data(self.data_dir, "test")
 
         test_st_psnr = numpy.zeros((test_data_s.shape[0], 1), numpy.float32)
         test_ts_psnr = numpy.zeros((test_data_t.shape[0], 1), numpy.float32)
@@ -425,14 +426,23 @@ class UGATIT(object) :
 
                 st_psnr = common_metrics.psnr(test_st, test_data_t[i])
                 ts_psnr = common_metrics.psnr(test_ts, test_data_s[i])
+                st_ssim = SSIM(test_st, test_data_t[i], data_range=2.)
+                ts_ssim = SSIM(test_ts, test_data_s[i], data_range=2.)
+                st_mae = abs(test_st - test_data_t[i]).mean()
+                ts_mae = abs(test_ts - test_data_s[i])
 
                 test_st_psnr[i] = st_psnr
                 test_ts_psnr[i] = ts_psnr
+                test_st_ssim[i] = st_ssim
+                test_ts_ssim[i] = ts_ssim
+                test_st_mae[i] = st_mae
+                test_ts_mae[i] = ts_mae
                 test_st_list.append(test_st)
                 test_ts_list.append(test_ts)
 
-        msg = "  test_st_psnr:%f/%f  test_ts_psnr:%f/%f" % \
-              (test_st_psnr.mean(), test_st_psnr.std(), test_ts_psnr.mean(), test_ts_psnr.std())
+        msg = "test_st_psnr:%f/%f  test_st_ssim:%f/%f  test_st_mae:%f/%f  test_ts_psnr:%f/%f  test_ts_ssim:%f/%f  test_ts_mae:%f/%f" % \
+              (test_st_psnr.mean(), test_st_psnr.std(), test_st_ssim.mean(), test_st_ssim.std(), test_st_mae.mean(), test_st_mae.std(),
+               test_ts_psnr.mean(), test_ts_psnr.std(), test_ts_ssim.mean(), test_ts_ssim.std(), test_ts_mae.mean(), test_ts_mae.std())
         print(msg)
 
         if self.result_dir:
@@ -441,3 +451,7 @@ class UGATIT(object) :
 
             numpy.save(os.path.join(self.result_dir, "st_psnr.npy"), test_st_psnr)
             numpy.save(os.path.join(self.result_dir, "ts_psnr.npy"), test_ts_psnr)
+            numpy.save(os.path.join(self.result_dir, "st_ssim.npy"), test_st_ssim)
+            numpy.save(os.path.join(self.result_dir, "ts_ssim.npy"), test_ts_ssim)
+            numpy.save(os.path.join(self.result_dir, "st_mae.npy"), test_st_mae)
+            numpy.save(os.path.join(self.result_dir, "ts_mae.npy"), test_ts_mae)
