@@ -422,14 +422,14 @@ class UGATIT(object) :
                 test_ts /= used
 
                 if self.result_dir:
-                    common_brats.save_nii(test_ts, os.path.join(self.result_dir, "syn_%s.nii.gz" % test_ids_t[i]))
+                    common_brats.save_nii(test_ts, os.path.join(self.result_dir, "syn_%d.nii.gz" % i))
 
                 st_psnr = common_metrics.psnr(test_st, test_data_t[i])
                 ts_psnr = common_metrics.psnr(test_ts, test_data_s[i])
                 st_ssim = SSIM(test_st, test_data_t[i], data_range=2.)
                 ts_ssim = SSIM(test_ts, test_data_s[i], data_range=2.)
                 st_mae = abs(test_st - test_data_t[i]).mean()
-                ts_mae = abs(test_ts - test_data_s[i])
+                ts_mae = abs(test_ts - test_data_s[i]).mean()
 
                 test_st_psnr[i] = st_psnr
                 test_ts_psnr[i] = ts_psnr

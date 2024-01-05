@@ -1,0 +1,53 @@
+(base) chenxu@chenxu-Z690-UD-DDR4:~/github/UGATIT-pytorch$ python main_brats.py --gpu 1 --data_dir /home/chenxu/datasets/brats/h5_data --checkpoint_dir /home/chenxu/training/checkpoints/ugatit/brats --light True --batch_size 4
+
+##### Information #####
+# light :  True
+# data_dir :  /home/chenxu/datasets/brats/h5_data
+# batch_size :  4
+# iteration per epoch :  100
+
+##### Generator #####
+# residual blocks :  4
+
+##### Discriminator #####
+# discriminator layer :  6
+
+##### Weight #####
+# adv_weight :  1
+# cycle_weight :  10
+# identity_weight :  10
+# cam_weight :  1000
+training start !
+[    1/  100] time: 5043.7704 d_loss: 3.92713547, g_loss: 1413.99829102  val_st_psnr:22.843161/0.691803  val_ts_psnr:22.311567/0.506055  best_ts_psnr:22.311567
+[    2/  100] time: 10102.7716 d_loss: 3.96948290, g_loss: 764.99822998  val_st_psnr:23.234358/0.757092  val_ts_psnr:21.615692/0.579620  best_ts_psnr:22.311567
+[    3/  100] time: 15161.7424 d_loss: 3.11914778, g_loss: 729.72094727  val_st_psnr:22.616766/0.710124  val_ts_psnr:22.769390/0.691027  best_ts_psnr:22.769390
+[    4/  100] time: 20222.3961 d_loss: 3.33062315, g_loss: 770.38323975  val_st_psnr:23.177900/0.768192  val_ts_psnr:22.403025/0.636474  best_ts_psnr:22.769390
+[    5/  100] time: 25281.6764 d_loss: 3.36358047, g_loss: 705.27606201  val_st_psnr:23.108959/0.694953  val_ts_psnr:22.785046/0.619918  best_ts_psnr:22.785046
+[    6/  100] time: 30331.9909 d_loss: 2.97276092, g_loss: 819.32409668  val_st_psnr:22.755741/0.676107  val_ts_psnr:22.792126/0.630819  best_ts_psnr:22.792126
+[    7/  100] time: 35381.8599 d_loss: 2.72247767, g_loss: 897.53784180  val_st_psnr:22.710592/0.858572  val_ts_psnr:22.600817/0.728813  best_ts_psnr:22.792126
+[    8/  100] time: 40431.3493 d_loss: 3.01456451, g_loss: 721.36181641  val_st_psnr:23.113022/0.800093  val_ts_psnr:22.259632/0.857801  best_ts_psnr:22.792126
+[    9/  100] time: 45480.6553 d_loss: 2.86547518, g_loss: 1224.36743164  val_st_psnr:23.201555/0.589070  val_ts_psnr:22.024994/0.663452  best_ts_psnr:22.792126
+[   10/  100] time: 50530.0219 d_loss: 2.38566446, g_loss: 932.18432617  val_st_psnr:22.977415/0.921473  val_ts_psnr:22.026571/0.569288  best_ts_psnr:22.792126
+[   11/  100] time: 55579.3911 d_loss: 2.86107874, g_loss: 1071.99645996  val_st_psnr:22.640102/0.574152  val_ts_psnr:22.229370/0.657425  best_ts_psnr:22.792126
+[   12/  100] time: 60628.6790 d_loss: 3.46636558, g_loss: 2167.13696289  val_st_psnr:20.663414/0.389246  val_ts_psnr:22.059122/0.722253  best_ts_psnr:22.792126
+[   13/  100] time: 65677.4603 d_loss: 2.85847712, g_loss: 1120.12768555  val_st_psnr:22.256039/0.570623  val_ts_psnr:22.506351/0.613801  best_ts_psnr:22.792126
+[   14/  100] time: 70726.7958 d_loss: 2.31756306, g_loss: 528.55908203  val_st_psnr:22.659653/0.806735  val_ts_psnr:22.719296/0.684357  best_ts_psnr:22.792126
+[   15/  100] time: 75776.0685 d_loss: 2.20387053, g_loss: 513.01171875  val_st_psnr:21.846472/0.680654  val_ts_psnr:21.698658/0.660502  best_ts_psnr:22.792126
+[   16/  100] time: 80825.3646 d_loss: 2.46568632, g_loss: 1135.43701172  val_st_psnr:22.725611/0.835202  val_ts_psnr:22.523922/0.820809  best_ts_psnr:22.792126
+[   17/  100] time: 85874.5603 d_loss: 2.78383875, g_loss: 1644.06958008  val_st_psnr:21.399748/0.519140  val_ts_psnr:20.690876/0.690729  best_ts_psnr:22.792126
+[   18/  100] time: 90923.9379 d_loss: 2.57205224, g_loss: 886.95568848  val_st_psnr:20.716095/0.805901  val_ts_psnr:20.291016/0.688300  best_ts_psnr:22.792126
+ [   19/  100] time: 95973.0987 d_loss: 2.19238234, g_loss: 642.81475830  val_st_psnr:19.392811/0.646117  val_ts_psnr:20.378254/0.765090  best_ts_psnr:22.792126
+[   20/  100] time: 101022.3646 d_loss: 2.05148482, g_loss: 363.48782349  val_st_psnr:19.385700/0.609414  val_ts_psnr:22.420853/0.641845  best_ts_psnr:22.792126
+[   21/  100] time: 106071.8656 d_loss: 2.07480764, g_loss: 290.02282715  val_st_psnr:22.634169/0.719732  val_ts_psnr:22.775223/0.618477  best_ts_psnr:22.792126
+[   22/  100] time: 111121.3333 d_loss: 2.34952259, g_loss: 872.72888184  val_st_psnr:20.115406/0.567940  val_ts_psnr:21.604136/0.622934  best_ts_psnr:22.792126
+[   23/  100] time: 116170.7227 d_loss: 2.34902859, g_loss: 922.73388672  val_st_psnr:23.027611/0.821221  val_ts_psnr:21.874338/0.697213  best_ts_psnr:22.792126
+[   24/  100] time: 121220.0559 d_loss: 2.87822676, g_loss: 1231.81689453  val_st_psnr:21.346905/0.405278  val_ts_psnr:21.216427/0.428702  best_ts_psnr:22.792126
+[   25/  100] time: 126269.5720 d_loss: 2.17136788, g_loss: 877.94403076  val_st_psnr:20.815472/0.499970  val_ts_psnr:19.672716/0.775469  best_ts_psnr:22.792126
+[   26/  100] time: 131319.8988 d_loss: 2.74083185, g_loss: 1169.18139648  val_st_psnr:20.836887/1.230718  val_ts_psnr:20.725975/0.792392  best_ts_psnr:22.792126
+[   27/  100] time: 136370.3791 d_loss: 2.54927754, g_loss: 1092.19580078  val_st_psnr:18.422619/0.550418  val_ts_psnr:21.092083/0.616023  best_ts_psnr:22.792126
+[   28/  100] time: 141420.6399 d_loss: 3.19930649, g_loss: 1486.30444336  val_st_psnr:18.470558/0.504755  val_ts_psnr:21.923435/0.571058  best_ts_psnr:22.792126
+[   29/  100] time: 146470.9701 d_loss: 2.48462296, g_loss: 760.90429688  val_st_psnr:21.207457/0.625911  val_ts_psnr:21.227167/0.566881  best_ts_psnr:22.792126
+[   30/  100] time: 151521.2776 d_loss: 3.17393184, g_loss: 1095.99035645  val_st_psnr:19.950842/0.538079  val_ts_psnr:22.273848/0.845525  best_ts_psnr:22.792126
+[   31/  100] time: 156571.4914 d_loss: 2.09922576, g_loss: 754.87402344  val_st_psnr:21.156406/0.509556  val_ts_psnr:21.630318/0.833093  best_ts_psnr:22.792126
+[   32/  100] time: 161621.7059 d_loss: 2.17354012, g_loss: 713.22741699  val_st_psnr:21.071476/0.669698  val_ts_psnr:19.546612/0.778044  best_ts_psnr:22.792126
+[   33/  100] time: 166674.2107 d_loss: 2.61281061, g_loss: 675.37292480  val_st_psnr:22.798346/0.643107  val_ts_psnr:19.892050/0.754038  best_ts_psnr:22.792126
